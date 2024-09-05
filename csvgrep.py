@@ -19,7 +19,7 @@ def add_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "match",
         type=str,
-        help="The regex to match. If this is not provided, lines that don't match will be dumped.",
+        help="The regex to match.",
     )
     parser.add_argument(
         "-i",
