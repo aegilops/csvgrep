@@ -119,9 +119,13 @@ def main() -> None:
         else:
             # match the regex on the specified column
             if args.invert_match:
-                if not regex.search(row[args.column]):
-                    writer.writerow(row)
-                    lines += 1
+                try:
+                    if not regex.search(row[args.column]):
+                        writer.writerow(row)
+                        lines += 1
+                except IndexError:
+                    LOG.error("Row %s has fewer columns than %s, cannot match on that column", row, args.column)
+                    continue
             elif regex.search(row[args.column]):
                 writer.writerow(row)
                 lines += 1
